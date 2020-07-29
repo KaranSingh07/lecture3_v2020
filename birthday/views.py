@@ -9,5 +9,5 @@ def index(request):
     today = datetime.datetime.now()
 
     return render(request, "birthday/birthday.html", {
-        "birthday": today.day == 7 and today.month == 12
+        "birthday": today.date == 7 and today.month == 12
     })
