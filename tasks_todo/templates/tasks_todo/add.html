@@ -2,13 +2,22 @@
 
 {% block body %}
 <h1>Add Task</h1>
-<form action="">
-    <input type="text" placeholder="Enter new task...">
+<form action="{% url 'tasks_todo:add' %}" method="POST">
+
+    {% csrf_token %}
+    <input type="text" name="task" placeholder="Enter new task...">
     <input type="submit" name="submit">
 </form>
 <br>
 <a href="{% url 'tasks_todo:index' %}">Back to all tasks</a>
-<!--Way of adding url in <a> element, 'index' is the name of url we've given to our
+
+{% endblock %}
+
+<!-- LINE 12: Way of adding url in <a> element, 'index' is the name of url we've given to our
     paths(urls) in urls.py file, task_todo is value of app_name variable
     defined in urls.py file-->
-{% endblock %}
+
+<!-- LINE 7: csrf_token is used for security purposes
+    It is a string token(see page source in browser) to ensure that no other
+    website submits some form to our website.
+    Remove this and run the application, you'll get the exact error.-->
