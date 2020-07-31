@@ -5,13 +5,16 @@
 <form action="{% url 'tasks_todo:add' %}" method="POST">
 
     {% csrf_token %}
-    <input type="text" name="task" placeholder="Enter new task...">
+    {{ form }}
     <input type="submit" name="submit">
 </form>
 <br>
 <a href="{% url 'tasks_todo:index' %}">Back to all tasks</a>
 
 {% endblock %}
+
+<!-- LINE 8: We can also add forms in conventional way like this...
+    <input type="text" name="task" placeholder="Enter new task..."> -->
 
 <!-- LINE 12: Way of adding url in <a> element, 'index' is the name of url we've given to our
     paths(urls) in urls.py file, task_todo is value of app_name variable
