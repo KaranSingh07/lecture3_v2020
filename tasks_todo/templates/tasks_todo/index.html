@@ -6,6 +6,9 @@
 <ul>
     {% for task in tasks %}
     <li>{{ task }}</li>
+    {% empty %}
+    <!-- If task list is empty, let the user know -->
+    <h3>No tasks added</h3>
     {% endfor %}
 </ul>
 <a href="{% url 'tasks_todo:add' %}">Add a new task...</a>

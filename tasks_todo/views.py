@@ -5,8 +5,6 @@ from django.urls import reverse
 
 # Create your views here.
 
-tasks = []
-
 
 class NewTaskForm(forms.Form):
     task = forms.CharField(label="New task")
@@ -14,8 +12,11 @@ class NewTaskForm(forms.Form):
 
 
 def index(request):
+    # If user doesn't have a list of task, create one for them...
+    if "tasks" not in request.session:
+        request.session["tasks"] = []
     return render(request, "tasks_todo/index.html", {
-        "tasks": tasks
+        "tasks": request.session["tasks"]
     })
 
 
@@ -26,7 +27,7 @@ def add(request):
         if form.is_valid():                 # If form is valid,
             # Get the task input and append it to the list.
             task = form.cleaned_data["task"]
-            tasks.append(task)
+            request.session["tasks"] += [task]
 
             return HttpResponseRedirect(reverse("tasks_todo:index"))
             # Or simply HttpResponseRedirect(reverse("/tasks_todo")
